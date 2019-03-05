@@ -23,5 +23,16 @@ export class AppComponent {
       console.log(res);
     })
   }
+
+  searchcall(){
+    var headers = new HttpHeaders();
+    var searchterm = 'query=' + this.searchquery;
+    
+    headers.append('Content-Type', 'application/X-www-form-urlencoded');
+    
+    this.http.post('http://localhost:4200/search', searchterm, {headers: headers}).subscribe((res) => {
+      this.tweetsdata = res.json().data.statuses;
+    });
+  }
   
 }
